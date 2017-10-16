@@ -1,5 +1,5 @@
 package com.duoc.desktravel.entity;
-// Generated 09-10-2017 18:36:09 by Hibernate Tools 4.3.1
+// Generated 15-10-2017 19:02:40 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -10,39 +10,39 @@ import java.math.BigDecimal;
 public class ItinerarioId  implements java.io.Serializable {
 
 
-     private BigDecimal destino;
-     private BigDecimal actividadviaje;
-     private BigDecimal origen;
+     private BigDecimal iddestino;
+     private BigDecimal idactividadviaje;
+     private BigDecimal idorigen;
 
     public ItinerarioId() {
     }
 
-    public ItinerarioId(BigDecimal destino, BigDecimal actividadviaje, BigDecimal origen) {
-       this.destino = destino;
-       this.actividadviaje = actividadviaje;
-       this.origen = origen;
+    public ItinerarioId(BigDecimal iddestino, BigDecimal idactividadviaje, BigDecimal idorigen) {
+       this.iddestino = iddestino;
+       this.idactividadviaje = idactividadviaje;
+       this.idorigen = idorigen;
     }
    
-    public BigDecimal getDestino() {
-        return this.destino;
+    public BigDecimal getIddestino() {
+        return this.iddestino;
     }
     
-    public void setDestino(BigDecimal destino) {
-        this.destino = destino;
+    public void setIddestino(BigDecimal iddestino) {
+        this.iddestino = iddestino;
     }
-    public BigDecimal getActividadviaje() {
-        return this.actividadviaje;
-    }
-    
-    public void setActividadviaje(BigDecimal actividadviaje) {
-        this.actividadviaje = actividadviaje;
-    }
-    public BigDecimal getOrigen() {
-        return this.origen;
+    public BigDecimal getIdactividadviaje() {
+        return this.idactividadviaje;
     }
     
-    public void setOrigen(BigDecimal origen) {
-        this.origen = origen;
+    public void setIdactividadviaje(BigDecimal idactividadviaje) {
+        this.idactividadviaje = idactividadviaje;
+    }
+    public BigDecimal getIdorigen() {
+        return this.idorigen;
+    }
+    
+    public void setIdorigen(BigDecimal idorigen) {
+        this.idorigen = idorigen;
     }
 
 
@@ -52,17 +52,17 @@ public class ItinerarioId  implements java.io.Serializable {
 		 if ( !(other instanceof ItinerarioId) ) return false;
 		 ItinerarioId castOther = ( ItinerarioId ) other; 
          
-		 return ( (this.getDestino()==castOther.getDestino()) || ( this.getDestino()!=null && castOther.getDestino()!=null && this.getDestino().equals(castOther.getDestino()) ) )
- && ( (this.getActividadviaje()==castOther.getActividadviaje()) || ( this.getActividadviaje()!=null && castOther.getActividadviaje()!=null && this.getActividadviaje().equals(castOther.getActividadviaje()) ) )
- && ( (this.getOrigen()==castOther.getOrigen()) || ( this.getOrigen()!=null && castOther.getOrigen()!=null && this.getOrigen().equals(castOther.getOrigen()) ) );
+		 return ( (this.getIddestino()==castOther.getIddestino()) || ( this.getIddestino()!=null && castOther.getIddestino()!=null && this.getIddestino().equals(castOther.getIddestino()) ) )
+ && ( (this.getIdactividadviaje()==castOther.getIdactividadviaje()) || ( this.getIdactividadviaje()!=null && castOther.getIdactividadviaje()!=null && this.getIdactividadviaje().equals(castOther.getIdactividadviaje()) ) )
+ && ( (this.getIdorigen()==castOther.getIdorigen()) || ( this.getIdorigen()!=null && castOther.getIdorigen()!=null && this.getIdorigen().equals(castOther.getIdorigen()) ) );
    }
    
    public int hashCode() {
          int result = 17;
          
-         result = 37 * result + ( getDestino() == null ? 0 : this.getDestino().hashCode() );
-         result = 37 * result + ( getActividadviaje() == null ? 0 : this.getActividadviaje().hashCode() );
-         result = 37 * result + ( getOrigen() == null ? 0 : this.getOrigen().hashCode() );
+         result = 37 * result + ( getIddestino() == null ? 0 : this.getIddestino().hashCode() );
+         result = 37 * result + ( getIdactividadviaje() == null ? 0 : this.getIdactividadviaje().hashCode() );
+         result = 37 * result + ( getIdorigen() == null ? 0 : this.getIdorigen().hashCode() );
          return result;
    }   
 

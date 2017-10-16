@@ -1,5 +1,5 @@
 package com.duoc.desktravel.entity;
-// Generated 09-10-2017 18:36:09 by Hibernate Tools 4.3.1
+// Generated 15-10-2017 19:02:40 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -11,23 +11,23 @@ public class Permiso  implements java.io.Serializable {
 
 
      private BigDecimal idpermiso;
+     private Perfil perfil;
      private String nombre;
      private String descripcion;
-     private BigDecimal perfil;
 
     public Permiso() {
     }
 
 	
-    public Permiso(BigDecimal idpermiso, BigDecimal perfil) {
+    public Permiso(BigDecimal idpermiso, Perfil perfil) {
         this.idpermiso = idpermiso;
         this.perfil = perfil;
     }
-    public Permiso(BigDecimal idpermiso, String nombre, String descripcion, BigDecimal perfil) {
+    public Permiso(BigDecimal idpermiso, Perfil perfil, String nombre, String descripcion) {
        this.idpermiso = idpermiso;
+       this.perfil = perfil;
        this.nombre = nombre;
        this.descripcion = descripcion;
-       this.perfil = perfil;
     }
    
     public BigDecimal getIdpermiso() {
@@ -36,6 +36,13 @@ public class Permiso  implements java.io.Serializable {
     
     public void setIdpermiso(BigDecimal idpermiso) {
         this.idpermiso = idpermiso;
+    }
+    public Perfil getPerfil() {
+        return this.perfil;
+    }
+    
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
     public String getNombre() {
         return this.nombre;
@@ -50,13 +57,6 @@ public class Permiso  implements java.io.Serializable {
     
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-    public BigDecimal getPerfil() {
-        return this.perfil;
-    }
-    
-    public void setPerfil(BigDecimal perfil) {
-        this.perfil = perfil;
     }
 
 

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.duoc.desktravel.entity.Cuentacurso" table="CUENTACURSO" schema="C##PABLO" optimistic-lock="version">
+        <id name="idcuentacurso" type="big_decimal">
+            <column name="IDCUENTACURSO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="curso" class="com.duoc.desktravel.entity.Curso" fetch="select">
+            <column name="IDCURSO" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="saldo" type="big_decimal">
+            <column name="SALDO" precision="22" scale="0" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="200" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="200" />
+        </property>
+        <property name="encargado" type="string">
+            <column name="ENCARGADO" length="200" />
+        </property>
+        <set name="pagos" table="PAGO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDCUENTACURSO" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.duoc.desktravel.entity.Pago" />
+        </set>
+    </class>
+</hibernate-mapping>

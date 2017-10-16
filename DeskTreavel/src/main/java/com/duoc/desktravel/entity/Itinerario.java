@@ -1,8 +1,7 @@
 package com.duoc.desktravel.entity;
-// Generated 09-10-2017 18:36:09 by Hibernate Tools 4.3.1
+// Generated 15-10-2017 19:02:40 by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -12,23 +11,32 @@ public class Itinerario  implements java.io.Serializable {
 
 
      private ItinerarioId id;
+     private Actividadviaje actividadviaje;
+     private Contrato contrato;
+     private Destino destino;
+     private Origen origen;
      private Date fechainicio;
      private Date fechatermino;
-     private BigDecimal contrato;
 
     public Itinerario() {
     }
 
 	
-    public Itinerario(ItinerarioId id, BigDecimal contrato) {
+    public Itinerario(ItinerarioId id, Actividadviaje actividadviaje, Contrato contrato, Destino destino, Origen origen) {
         this.id = id;
+        this.actividadviaje = actividadviaje;
         this.contrato = contrato;
+        this.destino = destino;
+        this.origen = origen;
     }
-    public Itinerario(ItinerarioId id, Date fechainicio, Date fechatermino, BigDecimal contrato) {
+    public Itinerario(ItinerarioId id, Actividadviaje actividadviaje, Contrato contrato, Destino destino, Origen origen, Date fechainicio, Date fechatermino) {
        this.id = id;
+       this.actividadviaje = actividadviaje;
+       this.contrato = contrato;
+       this.destino = destino;
+       this.origen = origen;
        this.fechainicio = fechainicio;
        this.fechatermino = fechatermino;
-       this.contrato = contrato;
     }
    
     public ItinerarioId getId() {
@@ -37,6 +45,34 @@ public class Itinerario  implements java.io.Serializable {
     
     public void setId(ItinerarioId id) {
         this.id = id;
+    }
+    public Actividadviaje getActividadviaje() {
+        return this.actividadviaje;
+    }
+    
+    public void setActividadviaje(Actividadviaje actividadviaje) {
+        this.actividadviaje = actividadviaje;
+    }
+    public Contrato getContrato() {
+        return this.contrato;
+    }
+    
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
+    }
+    public Destino getDestino() {
+        return this.destino;
+    }
+    
+    public void setDestino(Destino destino) {
+        this.destino = destino;
+    }
+    public Origen getOrigen() {
+        return this.origen;
+    }
+    
+    public void setOrigen(Origen origen) {
+        this.origen = origen;
     }
     public Date getFechainicio() {
         return this.fechainicio;
@@ -51,13 +87,6 @@ public class Itinerario  implements java.io.Serializable {
     
     public void setFechatermino(Date fechatermino) {
         this.fechatermino = fechatermino;
-    }
-    public BigDecimal getContrato() {
-        return this.contrato;
-    }
-    
-    public void setContrato(BigDecimal contrato) {
-        this.contrato = contrato;
     }
 
 

@@ -1,5 +1,5 @@
 package com.duoc.desktravel.entity;
-// Generated 09-10-2017 18:36:09 by Hibernate Tools 4.3.1
+// Generated 15-10-2017 19:02:40 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -12,31 +12,31 @@ public class Pago  implements java.io.Serializable {
 
 
      private BigDecimal idpago;
-     private BigDecimal cuentacurso;
+     private Cuentaalumno cuentaalumno;
+     private Cuentacurso cuentacurso;
+     private Tipopago tipopago;
      private Date fechapago;
      private String detalle;
-     private String montocancelado;
-     private BigDecimal tipopago;
-     private BigDecimal cuentaalumno;
+     private BigDecimal montocancelado;
 
     public Pago() {
     }
 
 	
-    public Pago(BigDecimal idpago, BigDecimal cuentacurso, BigDecimal tipopago, BigDecimal cuentaalumno) {
+    public Pago(BigDecimal idpago, Cuentaalumno cuentaalumno, Cuentacurso cuentacurso, Tipopago tipopago) {
         this.idpago = idpago;
+        this.cuentaalumno = cuentaalumno;
         this.cuentacurso = cuentacurso;
         this.tipopago = tipopago;
-        this.cuentaalumno = cuentaalumno;
     }
-    public Pago(BigDecimal idpago, BigDecimal cuentacurso, Date fechapago, String detalle, String montocancelado, BigDecimal tipopago, BigDecimal cuentaalumno) {
+    public Pago(BigDecimal idpago, Cuentaalumno cuentaalumno, Cuentacurso cuentacurso, Tipopago tipopago, Date fechapago, String detalle, BigDecimal montocancelado) {
        this.idpago = idpago;
+       this.cuentaalumno = cuentaalumno;
        this.cuentacurso = cuentacurso;
+       this.tipopago = tipopago;
        this.fechapago = fechapago;
        this.detalle = detalle;
        this.montocancelado = montocancelado;
-       this.tipopago = tipopago;
-       this.cuentaalumno = cuentaalumno;
     }
    
     public BigDecimal getIdpago() {
@@ -46,12 +46,26 @@ public class Pago  implements java.io.Serializable {
     public void setIdpago(BigDecimal idpago) {
         this.idpago = idpago;
     }
-    public BigDecimal getCuentacurso() {
+    public Cuentaalumno getCuentaalumno() {
+        return this.cuentaalumno;
+    }
+    
+    public void setCuentaalumno(Cuentaalumno cuentaalumno) {
+        this.cuentaalumno = cuentaalumno;
+    }
+    public Cuentacurso getCuentacurso() {
         return this.cuentacurso;
     }
     
-    public void setCuentacurso(BigDecimal cuentacurso) {
+    public void setCuentacurso(Cuentacurso cuentacurso) {
         this.cuentacurso = cuentacurso;
+    }
+    public Tipopago getTipopago() {
+        return this.tipopago;
+    }
+    
+    public void setTipopago(Tipopago tipopago) {
+        this.tipopago = tipopago;
     }
     public Date getFechapago() {
         return this.fechapago;
@@ -67,26 +81,12 @@ public class Pago  implements java.io.Serializable {
     public void setDetalle(String detalle) {
         this.detalle = detalle;
     }
-    public String getMontocancelado() {
+    public BigDecimal getMontocancelado() {
         return this.montocancelado;
     }
     
-    public void setMontocancelado(String montocancelado) {
+    public void setMontocancelado(BigDecimal montocancelado) {
         this.montocancelado = montocancelado;
-    }
-    public BigDecimal getTipopago() {
-        return this.tipopago;
-    }
-    
-    public void setTipopago(BigDecimal tipopago) {
-        this.tipopago = tipopago;
-    }
-    public BigDecimal getCuentaalumno() {
-        return this.cuentaalumno;
-    }
-    
-    public void setCuentaalumno(BigDecimal cuentaalumno) {
-        this.cuentaalumno = cuentaalumno;
     }
 
 

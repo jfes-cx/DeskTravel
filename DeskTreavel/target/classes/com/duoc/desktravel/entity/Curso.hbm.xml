@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.duoc.desktravel.entity.Curso" table="CURSO" schema="C##PABLO" optimistic-lock="version">
+        <id name="idcurso" type="big_decimal">
+            <column name="IDCURSO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="colegio" class="com.duoc.desktravel.entity.Colegio" fetch="select">
+            <column name="IDCOLEGIO" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="100" />
+        </property>
+        <property name="profesorjefe" type="string">
+            <column name="PROFESORJEFE" length="200" />
+        </property>
+        <set name="cuentacursos" table="CUENTACURSO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDCURSO" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.duoc.desktravel.entity.Cuentacurso" />
+        </set>
+        <set name="alumnos" table="ALUMNO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDCURSO" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.duoc.desktravel.entity.Alumno" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,5 +1,5 @@
 package com.duoc.desktravel.entity;
-// Generated 09-10-2017 18:36:09 by Hibernate Tools 4.3.1
+// Generated 15-10-2017 19:02:40 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -10,39 +10,30 @@ import java.math.BigDecimal;
 public class ActividadaportesId  implements java.io.Serializable {
 
 
-     private BigDecimal aporte;
-     private BigDecimal actividad;
-     private BigDecimal cuentaalumnos;
+     private BigDecimal idactividadaportes;
+     private BigDecimal idcuentaalumnos;
 
     public ActividadaportesId() {
     }
 
-    public ActividadaportesId(BigDecimal aporte, BigDecimal actividad, BigDecimal cuentaalumnos) {
-       this.aporte = aporte;
-       this.actividad = actividad;
-       this.cuentaalumnos = cuentaalumnos;
+    public ActividadaportesId(BigDecimal idactividadaportes, BigDecimal idcuentaalumnos) {
+       this.idactividadaportes = idactividadaportes;
+       this.idcuentaalumnos = idcuentaalumnos;
     }
    
-    public BigDecimal getAporte() {
-        return this.aporte;
+    public BigDecimal getIdactividadaportes() {
+        return this.idactividadaportes;
     }
     
-    public void setAporte(BigDecimal aporte) {
-        this.aporte = aporte;
+    public void setIdactividadaportes(BigDecimal idactividadaportes) {
+        this.idactividadaportes = idactividadaportes;
     }
-    public BigDecimal getActividad() {
-        return this.actividad;
-    }
-    
-    public void setActividad(BigDecimal actividad) {
-        this.actividad = actividad;
-    }
-    public BigDecimal getCuentaalumnos() {
-        return this.cuentaalumnos;
+    public BigDecimal getIdcuentaalumnos() {
+        return this.idcuentaalumnos;
     }
     
-    public void setCuentaalumnos(BigDecimal cuentaalumnos) {
-        this.cuentaalumnos = cuentaalumnos;
+    public void setIdcuentaalumnos(BigDecimal idcuentaalumnos) {
+        this.idcuentaalumnos = idcuentaalumnos;
     }
 
 
@@ -52,17 +43,15 @@ public class ActividadaportesId  implements java.io.Serializable {
 		 if ( !(other instanceof ActividadaportesId) ) return false;
 		 ActividadaportesId castOther = ( ActividadaportesId ) other; 
          
-		 return ( (this.getAporte()==castOther.getAporte()) || ( this.getAporte()!=null && castOther.getAporte()!=null && this.getAporte().equals(castOther.getAporte()) ) )
- && ( (this.getActividad()==castOther.getActividad()) || ( this.getActividad()!=null && castOther.getActividad()!=null && this.getActividad().equals(castOther.getActividad()) ) )
- && ( (this.getCuentaalumnos()==castOther.getCuentaalumnos()) || ( this.getCuentaalumnos()!=null && castOther.getCuentaalumnos()!=null && this.getCuentaalumnos().equals(castOther.getCuentaalumnos()) ) );
+		 return ( (this.getIdactividadaportes()==castOther.getIdactividadaportes()) || ( this.getIdactividadaportes()!=null && castOther.getIdactividadaportes()!=null && this.getIdactividadaportes().equals(castOther.getIdactividadaportes()) ) )
+ && ( (this.getIdcuentaalumnos()==castOther.getIdcuentaalumnos()) || ( this.getIdcuentaalumnos()!=null && castOther.getIdcuentaalumnos()!=null && this.getIdcuentaalumnos().equals(castOther.getIdcuentaalumnos()) ) );
    }
    
    public int hashCode() {
          int result = 17;
          
-         result = 37 * result + ( getAporte() == null ? 0 : this.getAporte().hashCode() );
-         result = 37 * result + ( getActividad() == null ? 0 : this.getActividad().hashCode() );
-         result = 37 * result + ( getCuentaalumnos() == null ? 0 : this.getCuentaalumnos().hashCode() );
+         result = 37 * result + ( getIdactividadaportes() == null ? 0 : this.getIdactividadaportes().hashCode() );
+         result = 37 * result + ( getIdcuentaalumnos() == null ? 0 : this.getIdcuentaalumnos().hashCode() );
          return result;
    }   
 

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.duoc.desktravel.entity.Estadocuenta" table="ESTADOCUENTA" schema="C##PABLO" optimistic-lock="version">
+        <id name="idestadocuenta" type="big_decimal">
+            <column name="IDESTADOCUENTA" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cuentaalumno" class="com.duoc.desktravel.entity.Cuentaalumno" fetch="select">
+            <column name="IDCUENTAALUMNO" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="detalle" type="string">
+            <column name="DETALLE" length="200" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="FECHA" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

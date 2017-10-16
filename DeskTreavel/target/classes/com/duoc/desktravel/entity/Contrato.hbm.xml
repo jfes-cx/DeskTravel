@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.duoc.desktravel.entity.Contrato" table="CONTRATO" schema="C##PABLO" optimistic-lock="version">
+        <id name="idcontrato" type="big_decimal">
+            <column name="IDCONTRATO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="alumno" class="com.duoc.desktravel.entity.Alumno" fetch="select">
+            <column name="IDALUMNO" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="colaborador" class="com.duoc.desktravel.entity.Colaborador" fetch="select">
+            <column name="IDCOLABORADOR" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="polizaseguro" class="com.duoc.desktravel.entity.Polizaseguro" fetch="select">
+            <column name="IDPOLIZASEGUROS" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servicio" class="com.duoc.desktravel.entity.Servicio" fetch="select">
+            <column name="IDSERVICIO" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipocontrato" class="com.duoc.desktravel.entity.Tipocontrato" fetch="select">
+            <column name="IDTIPOCONTRATO" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="fechainicio" type="date">
+            <column name="FECHAINICIO" length="7" />
+        </property>
+        <property name="fechatermino" type="date">
+            <column name="FECHATERMINO" length="7" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="200" />
+        </property>
+        <set name="itinerarios" table="ITINERARIO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDCONTRATO" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.duoc.desktravel.entity.Itinerario" />
+        </set>
+        <set name="anexoses" table="ANEXOS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDCONTRATO" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.duoc.desktravel.entity.Anexos" />
+        </set>
+    </class>
+</hibernate-mapping>

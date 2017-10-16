@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.duoc.desktravel.entity.Pago" table="PAGO" schema="C##PABLO" optimistic-lock="version">
+        <id name="idpago" type="big_decimal">
+            <column name="IDPAGO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cuentaalumno" class="com.duoc.desktravel.entity.Cuentaalumno" fetch="select">
+            <column name="IDCUENTAALUMNO" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentacurso" class="com.duoc.desktravel.entity.Cuentacurso" fetch="select">
+            <column name="IDCUENTACURSO" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipopago" class="com.duoc.desktravel.entity.Tipopago" fetch="select">
+            <column name="IDTIPOPAGO" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="fechapago" type="date">
+            <column name="FECHAPAGO" length="7" />
+        </property>
+        <property name="detalle" type="string">
+            <column name="DETALLE" length="200" />
+        </property>
+        <property name="montocancelado" type="big_decimal">
+            <column name="MONTOCANCELADO" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>
