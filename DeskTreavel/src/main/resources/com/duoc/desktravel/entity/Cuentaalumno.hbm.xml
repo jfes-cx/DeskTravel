@@ -1,45 +1,44 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.duoc.desktravel.entity.Cuentaalumno" table="CUENTAALUMNO" schema="C##PABLO" optimistic-lock="version">
-        <id name="idcuentaalumnos" type="big_decimal">
-            <column name="IDCUENTAALUMNOS" precision="22" scale="0" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="alumno" class="com.duoc.desktravel.entity.Alumno" fetch="select">
-            <column name="IDALUMNO" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <many-to-one name="tipocuenta" class="com.duoc.desktravel.entity.Tipocuenta" fetch="select">
-            <column name="IDTIPOCUENTA" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <property name="cupototal" type="big_decimal">
-            <column name="CUPOTOTAL" precision="22" scale="0" />
-        </property>
-        <property name="cupoutilizado" type="big_decimal">
-            <column name="CUPOUTILIZADO" precision="22" scale="0" />
-        </property>
-        <property name="aporte" type="big_decimal">
-            <column name="APORTE" precision="22" scale="0" not-null="true" />
-        </property>
-        <set name="actividadaporteses" table="ACTIVIDADAPORTES" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDCUENTAALUMNOS" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Actividadaportes" />
-        </set>
-        <set name="estadocuentas" table="ESTADOCUENTA" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDCUENTAALUMNO" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Estadocuenta" />
-        </set>
-        <set name="pagos" table="PAGO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDCUENTAALUMNO" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Pago" />
-        </set>
-    </class>
+  <class name="com.duoc.desktravel.model.Cuentaalumno" optimistic-lock="version" schema="C##PABLO" table="CUENTAALUMNO">
+    <id name="idcuentaalumnos" type="big_decimal">
+      <column name="IDCUENTAALUMNOS" precision="22" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.duoc.desktravel.model.Alumno" fetch="select" name="alumno">
+      <column name="IDALUMNO" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <many-to-one class="com.duoc.desktravel.model.Tipocuenta" fetch="select" name="tipocuenta">
+      <column name="IDTIPOCUENTA" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <property name="cupototal" type="big_decimal">
+      <column name="CUPOTOTAL" precision="22" scale="0"/>
+    </property>
+    <property name="cupoutilizado" type="big_decimal">
+      <column name="CUPOUTILIZADO" precision="22" scale="0"/>
+    </property>
+    <property name="aporte" type="big_decimal">
+      <column name="APORTE" not-null="true" precision="22" scale="0"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="actividadaporteses" table="ACTIVIDADAPORTES">
+      <key>
+        <column name="IDCUENTAALUMNOS" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Actividadaportes"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="estadocuentas" table="ESTADOCUENTA">
+      <key>
+        <column name="IDCUENTAALUMNO" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Estadocuenta"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="pagos" table="PAGO">
+      <key>
+        <column name="IDCUENTAALUMNO" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Pago"/>
+    </set>
+  </class>
 </hibernate-mapping>

@@ -1,33 +1,32 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.duoc.desktravel.entity.Pais" table="PAIS" schema="C##PABLO" optimistic-lock="version">
-        <id name="idpais" type="big_decimal">
-            <column name="IDPAIS" precision="22" scale="0" />
-            <generator class="assigned" />
-        </id>
-        <property name="nombre" type="string">
-            <column name="NOMBRE" length="200" />
-        </property>
-        <set name="destinos" table="DESTINO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDPAIS" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Destino" />
-        </set>
-        <set name="origens" table="ORIGEN" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDPAIS" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Origen" />
-        </set>
-        <set name="regions" table="REGION" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDPAIS" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Region" />
-        </set>
-    </class>
+  <class name="com.duoc.desktravel.model.Pais" optimistic-lock="version" schema="C##PABLO" table="PAIS">
+    <id name="idpais" type="big_decimal">
+      <column name="IDPAIS" precision="22" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="nombre" type="string">
+      <column length="200" name="NOMBRE"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="destinos" table="DESTINO">
+      <key>
+        <column name="IDPAIS" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Destino"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="origens" table="ORIGEN">
+      <key>
+        <column name="IDPAIS" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Origen"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="regions" table="REGION">
+      <key>
+        <column name="IDPAIS" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Region"/>
+    </set>
+  </class>
 </hibernate-mapping>

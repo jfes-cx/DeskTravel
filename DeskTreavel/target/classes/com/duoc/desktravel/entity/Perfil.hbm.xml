@@ -1,36 +1,35 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.duoc.desktravel.entity.Perfil" table="PERFIL" schema="C##PABLO" optimistic-lock="version">
-        <id name="idperfil" type="big_decimal">
-            <column name="IDPERFIL" precision="22" scale="0" />
-            <generator class="assigned" />
-        </id>
-        <property name="descripcion" type="string">
-            <column name="DESCRIPCION" length="200" />
-        </property>
-        <property name="estado" type="string">
-            <column name="ESTADO" length="200" />
-        </property>
-        <set name="cuentausuarios" table="CUENTAUSUARIO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDPERFIL" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Cuentausuario" />
-        </set>
-        <set name="permisos" table="PERMISO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDPERFIL" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Permiso" />
-        </set>
-        <set name="menus" table="MENU" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDPERFIL" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Menu" />
-        </set>
-    </class>
+  <class name="com.duoc.desktravel.model.Perfil" optimistic-lock="version" schema="C##PABLO" table="PERFIL">
+    <id name="idperfil" type="big_decimal">
+      <column name="IDPERFIL" precision="22" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="descripcion" type="string">
+      <column length="200" name="DESCRIPCION"/>
+    </property>
+    <property name="estado" type="string">
+      <column length="200" name="ESTADO"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="cuentausuarios" table="CUENTAUSUARIO">
+      <key>
+        <column name="IDPERFIL" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Cuentausuario"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="permisos" table="PERMISO">
+      <key>
+        <column name="IDPERFIL" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Permiso"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="menus" table="MENU">
+      <key>
+        <column name="IDPERFIL" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Menu"/>
+    </set>
+  </class>
 </hibernate-mapping>

@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 09-10-2017 18:36:12 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class name="com.duoc.desktravel.entity.Servicio" optimistic-lock="version" schema="C##PABLO" table="SERVICIO">
+  <class name="com.duoc.desktravel.model.Servicio" optimistic-lock="version" schema="C##PABLO" table="SERVICIO">
     <id name="idservicio" type="big_decimal">
       <column name="IDSERVICIO" precision="22" scale="0"/>
       <generator class="assigned"/>

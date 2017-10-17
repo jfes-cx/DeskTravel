@@ -1,24 +1,23 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.duoc.desktravel.entity.Destino" table="DESTINO" schema="C##PABLO" optimistic-lock="version">
-        <id name="iddestino" type="big_decimal">
-            <column name="IDDESTINO" precision="22" scale="0" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="pais" class="com.duoc.desktravel.entity.Pais" fetch="select">
-            <column name="IDPAIS" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <property name="nombredestino" type="string">
-            <column name="NOMBREDESTINO" length="50" />
-        </property>
-        <set name="itinerarios" table="ITINERARIO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDDESTINO" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Itinerario" />
-        </set>
-    </class>
+  <class name="com.duoc.desktravel.model.Destino" optimistic-lock="version" schema="C##PABLO" table="DESTINO">
+    <id name="iddestino" type="big_decimal">
+      <column name="IDDESTINO" precision="22" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.duoc.desktravel.model.Pais" fetch="select" name="pais">
+      <column name="IDPAIS" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <property name="nombredestino" type="string">
+      <column length="50" name="NOMBREDESTINO"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="itinerarios" table="ITINERARIO">
+      <key>
+        <column name="IDDESTINO" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Itinerario"/>
+    </set>
+  </class>
 </hibernate-mapping>

@@ -1,33 +1,32 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.duoc.desktravel.entity.Actividadviaje" table="ACTIVIDADVIAJE" schema="C##PABLO" optimistic-lock="version">
-        <id name="idactividadviaje" type="big_decimal">
-            <column name="IDACTIVIDADVIAJE" precision="22" scale="0" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="tipoactividadviaje" class="com.duoc.desktravel.entity.Tipoactividadviaje" fetch="select">
-            <column name="IDTIPOACTIVIDADVIAJE" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <property name="nombre" type="string">
-            <column name="NOMBRE" length="100" />
-        </property>
-        <property name="descripcion" type="string">
-            <column name="DESCRIPCION" length="200" />
-        </property>
-        <property name="fechainicio" type="date">
-            <column name="FECHAINICIO" length="7" />
-        </property>
-        <property name="fechatermino" type="date">
-            <column name="FECHATERMINO" length="7" />
-        </property>
-        <set name="itinerarios" table="ITINERARIO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDACTIVIDADVIAJE" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Itinerario" />
-        </set>
-    </class>
+  <class name="com.duoc.desktravel.model.Actividadviaje" optimistic-lock="version" schema="C##PABLO" table="ACTIVIDADVIAJE">
+    <id name="idactividadviaje" type="big_decimal">
+      <column name="IDACTIVIDADVIAJE" precision="22" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.duoc.desktravel.model.Tipoactividadviaje" fetch="select" name="tipoactividadviaje">
+      <column name="IDTIPOACTIVIDADVIAJE" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <property name="nombre" type="string">
+      <column length="100" name="NOMBRE"/>
+    </property>
+    <property name="descripcion" type="string">
+      <column length="200" name="DESCRIPCION"/>
+    </property>
+    <property name="fechainicio" type="date">
+      <column length="7" name="FECHAINICIO"/>
+    </property>
+    <property name="fechatermino" type="date">
+      <column length="7" name="FECHATERMINO"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="itinerarios" table="ITINERARIO">
+      <key>
+        <column name="IDACTIVIDADVIAJE" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Itinerario"/>
+    </set>
+  </class>
 </hibernate-mapping>

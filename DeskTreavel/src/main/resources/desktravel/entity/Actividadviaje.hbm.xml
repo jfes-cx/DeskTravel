@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 09-10-2017 18:36:12 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class name="com.duoc.desktravel.entity.Actividadviaje" optimistic-lock="version" schema="C##PABLO" table="ACTIVIDADVIAJE">
+  <class name="com.duoc.desktravel.model.Actividadviaje" optimistic-lock="version" schema="C##PABLO" table="ACTIVIDADVIAJE">
     <id name="idactividadviaje" type="big_decimal">
       <column name="IDACTIVIDADVIAJE" precision="22" scale="0"/>
       <generator class="assigned"/>

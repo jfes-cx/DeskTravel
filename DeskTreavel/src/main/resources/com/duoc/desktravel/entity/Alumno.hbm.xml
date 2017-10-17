@@ -1,48 +1,47 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.duoc.desktravel.entity.Alumno" table="ALUMNO" schema="C##PABLO" optimistic-lock="version">
-        <id name="idalumno" type="big_decimal">
-            <column name="IDALUMNO" precision="22" scale="0" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="apoderado" class="com.duoc.desktravel.entity.Apoderado" fetch="select">
-            <column name="IDAPODERADO" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <many-to-one name="curso" class="com.duoc.desktravel.entity.Curso" fetch="select">
-            <column name="IDCURSO" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <property name="nombre" type="string">
-            <column name="NOMBRE" length="200" />
-        </property>
-        <property name="direccion" type="string">
-            <column name="DIRECCION" length="200" />
-        </property>
-        <property name="telefono" type="big_decimal">
-            <column name="TELEFONO" precision="22" scale="0" />
-        </property>
-        <property name="correoelectronico" type="string">
-            <column name="CORREOELECTRONICO" length="200" not-null="true" />
-        </property>
-        <set name="contratos" table="CONTRATO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDALUMNO" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Contrato" />
-        </set>
-        <set name="polizaseguros" table="POLIZASEGURO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDALUMNO" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Polizaseguro" />
-        </set>
-        <set name="cuentaalumnos" table="CUENTAALUMNO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDALUMNO" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Cuentaalumno" />
-        </set>
-    </class>
+  <class name="com.duoc.desktravel.model.Alumno" optimistic-lock="version" schema="C##PABLO" table="ALUMNO">
+    <id name="idalumno" type="big_decimal">
+      <column name="IDALUMNO" precision="22" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.duoc.desktravel.model.Apoderado" fetch="select" name="apoderado">
+      <column name="IDAPODERADO" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <many-to-one class="com.duoc.desktravel.model.Curso" fetch="select" name="curso">
+      <column name="IDCURSO" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <property name="nombre" type="string">
+      <column length="200" name="NOMBRE"/>
+    </property>
+    <property name="direccion" type="string">
+      <column length="200" name="DIRECCION"/>
+    </property>
+    <property name="telefono" type="big_decimal">
+      <column name="TELEFONO" precision="22" scale="0"/>
+    </property>
+    <property name="correoelectronico" type="string">
+      <column length="200" name="CORREOELECTRONICO" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="contratos" table="CONTRATO">
+      <key>
+        <column name="IDALUMNO" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Contrato"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="polizaseguros" table="POLIZASEGURO">
+      <key>
+        <column name="IDALUMNO" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Polizaseguro"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="cuentaalumnos" table="CUENTAALUMNO">
+      <key>
+        <column name="IDALUMNO" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Cuentaalumno"/>
+    </set>
+  </class>
 </hibernate-mapping>

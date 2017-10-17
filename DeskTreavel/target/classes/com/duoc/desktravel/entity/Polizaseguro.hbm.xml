@@ -1,42 +1,41 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.duoc.desktravel.entity.Polizaseguro" table="POLIZASEGURO" schema="C##PABLO" optimistic-lock="version">
-        <id name="idpolizaseguros" type="big_decimal">
-            <column name="IDPOLIZASEGUROS" precision="22" scale="0" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="alumno" class="com.duoc.desktravel.entity.Alumno" fetch="select">
-            <column name="IDALUMNO" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <many-to-one name="aseguradora" class="com.duoc.desktravel.entity.Aseguradora" fetch="select">
-            <column name="IDASEGURADORA" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <many-to-one name="tiposeguro" class="com.duoc.desktravel.entity.Tiposeguro" fetch="select">
-            <column name="IDTIPOSEGURO" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <property name="descripcion" type="string">
-            <column name="DESCRIPCION" length="200" />
-        </property>
-        <property name="vigenciainicio" type="date">
-            <column name="VIGENCIAINICIO" length="7" />
-        </property>
-        <property name="vigenciatermino" type="date">
-            <column name="VIGENCIATERMINO" length="7" />
-        </property>
-        <property name="fechacontratacion" type="date">
-            <column name="FECHACONTRATACION" length="7" />
-        </property>
-        <property name="montoasegurado" type="big_decimal">
-            <column name="MONTOASEGURADO" precision="22" scale="0" />
-        </property>
-        <set name="contratos" table="CONTRATO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDPOLIZASEGUROS" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Contrato" />
-        </set>
-    </class>
+  <class name="com.duoc.desktravel.model.Polizaseguro" optimistic-lock="version" schema="C##PABLO" table="POLIZASEGURO">
+    <id name="idpolizaseguros" type="big_decimal">
+      <column name="IDPOLIZASEGUROS" precision="22" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.duoc.desktravel.model.Alumno" fetch="select" name="alumno">
+      <column name="IDALUMNO" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <many-to-one class="com.duoc.desktravel.model.Aseguradora" fetch="select" name="aseguradora">
+      <column name="IDASEGURADORA" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <many-to-one class="com.duoc.desktravel.model.Tiposeguro" fetch="select" name="tiposeguro">
+      <column name="IDTIPOSEGURO" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <property name="descripcion" type="string">
+      <column length="200" name="DESCRIPCION"/>
+    </property>
+    <property name="vigenciainicio" type="date">
+      <column length="7" name="VIGENCIAINICIO"/>
+    </property>
+    <property name="vigenciatermino" type="date">
+      <column length="7" name="VIGENCIATERMINO"/>
+    </property>
+    <property name="fechacontratacion" type="date">
+      <column length="7" name="FECHACONTRATACION"/>
+    </property>
+    <property name="montoasegurado" type="big_decimal">
+      <column name="MONTOASEGURADO" precision="22" scale="0"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="contratos" table="CONTRATO">
+      <key>
+        <column name="IDPOLIZASEGUROS" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Contrato"/>
+    </set>
+  </class>
 </hibernate-mapping>

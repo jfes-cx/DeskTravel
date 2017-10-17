@@ -1,37 +1,36 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.duoc.desktravel.entity.Itinerario" table="ITINERARIO" schema="C##PABLO" optimistic-lock="version">
-        <composite-id name="id" class="com.duoc.desktravel.entity.ItinerarioId">
-            <key-property name="iddestino" type="big_decimal">
-                <column name="IDDESTINO" precision="22" scale="0" />
-            </key-property>
-            <key-property name="idactividadviaje" type="big_decimal">
-                <column name="IDACTIVIDADVIAJE" precision="22" scale="0" />
-            </key-property>
-            <key-property name="idorigen" type="big_decimal">
-                <column name="IDORIGEN" precision="22" scale="0" />
-            </key-property>
-        </composite-id>
-        <many-to-one name="actividadviaje" class="com.duoc.desktravel.entity.Actividadviaje" update="false" insert="false" fetch="select">
-            <column name="IDACTIVIDADVIAJE" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <many-to-one name="contrato" class="com.duoc.desktravel.entity.Contrato" fetch="select">
-            <column name="IDCONTRATO" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <many-to-one name="destino" class="com.duoc.desktravel.entity.Destino" update="false" insert="false" fetch="select">
-            <column name="IDDESTINO" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <many-to-one name="origen" class="com.duoc.desktravel.entity.Origen" update="false" insert="false" fetch="select">
-            <column name="IDORIGEN" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <property name="fechainicio" type="date">
-            <column name="FECHAINICIO" length="7" />
-        </property>
-        <property name="fechatermino" type="date">
-            <column name="FECHATERMINO" length="7" />
-        </property>
-    </class>
+  <class name="com.duoc.desktravel.model.Itinerario" optimistic-lock="version" schema="C##PABLO" table="ITINERARIO">
+    <composite-id class="com.duoc.desktravel.model.ItinerarioId" name="id">
+      <key-property name="iddestino" type="big_decimal">
+        <column name="IDDESTINO" precision="22" scale="0"/>
+      </key-property>
+      <key-property name="idactividadviaje" type="big_decimal">
+        <column name="IDACTIVIDADVIAJE" precision="22" scale="0"/>
+      </key-property>
+      <key-property name="idorigen" type="big_decimal">
+        <column name="IDORIGEN" precision="22" scale="0"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="com.duoc.desktravel.model.Actividadviaje" fetch="select" insert="false" name="actividadviaje" update="false">
+      <column name="IDACTIVIDADVIAJE" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <many-to-one class="com.duoc.desktravel.model.Contrato" fetch="select" name="contrato">
+      <column name="IDCONTRATO" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <many-to-one class="com.duoc.desktravel.model.Destino" fetch="select" insert="false" name="destino" update="false">
+      <column name="IDDESTINO" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <many-to-one class="com.duoc.desktravel.model.Origen" fetch="select" insert="false" name="origen" update="false">
+      <column name="IDORIGEN" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <property name="fechainicio" type="date">
+      <column length="7" name="FECHAINICIO"/>
+    </property>
+    <property name="fechatermino" type="date">
+      <column length="7" name="FECHATERMINO"/>
+    </property>
+  </class>
 </hibernate-mapping>

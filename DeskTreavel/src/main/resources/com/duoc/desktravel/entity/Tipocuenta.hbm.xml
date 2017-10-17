@@ -1,21 +1,20 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.duoc.desktravel.entity.Tipocuenta" table="TIPOCUENTA" schema="C##PABLO" optimistic-lock="version">
-        <id name="idtipocuenta" type="big_decimal">
-            <column name="IDTIPOCUENTA" precision="22" scale="0" />
-            <generator class="assigned" />
-        </id>
-        <property name="nombre" type="string">
-            <column name="NOMBRE" length="200" />
-        </property>
-        <set name="cuentaalumnos" table="CUENTAALUMNO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDTIPOCUENTA" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Cuentaalumno" />
-        </set>
-    </class>
+  <class name="com.duoc.desktravel.model.Tipocuenta" optimistic-lock="version" schema="C##PABLO" table="TIPOCUENTA">
+    <id name="idtipocuenta" type="big_decimal">
+      <column name="IDTIPOCUENTA" precision="22" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="nombre" type="string">
+      <column length="200" name="NOMBRE"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="cuentaalumnos" table="CUENTAALUMNO">
+      <key>
+        <column name="IDTIPOCUENTA" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Cuentaalumno"/>
+    </set>
+  </class>
 </hibernate-mapping>

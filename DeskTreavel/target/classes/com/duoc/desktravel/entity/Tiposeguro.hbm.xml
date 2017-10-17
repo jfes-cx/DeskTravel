@@ -1,24 +1,23 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.duoc.desktravel.entity.Tiposeguro" table="TIPOSEGURO" schema="C##PABLO" optimistic-lock="version">
-        <id name="idtiposeguro" type="big_decimal">
-            <column name="IDTIPOSEGURO" precision="22" scale="0" />
-            <generator class="assigned" />
-        </id>
-        <property name="nombre" type="string">
-            <column name="NOMBRE" length="100" />
-        </property>
-        <property name="descripcion" type="string">
-            <column name="DESCRIPCION" length="200" />
-        </property>
-        <set name="polizaseguros" table="POLIZASEGURO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDTIPOSEGURO" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Polizaseguro" />
-        </set>
-    </class>
+  <class name="com.duoc.desktravel.model.Tiposeguro" optimistic-lock="version" schema="C##PABLO" table="TIPOSEGURO">
+    <id name="idtiposeguro" type="big_decimal">
+      <column name="IDTIPOSEGURO" precision="22" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="nombre" type="string">
+      <column length="100" name="NOMBRE"/>
+    </property>
+    <property name="descripcion" type="string">
+      <column length="200" name="DESCRIPCION"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="polizaseguros" table="POLIZASEGURO">
+      <key>
+        <column name="IDTIPOSEGURO" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Polizaseguro"/>
+    </set>
+  </class>
 </hibernate-mapping>

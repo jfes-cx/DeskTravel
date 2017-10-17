@@ -1,36 +1,35 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.duoc.desktravel.entity.Colaborador" table="COLABORADOR" schema="C##PABLO" optimistic-lock="version">
-        <id name="idcolaborador" type="big_decimal">
-            <column name="IDCOLABORADOR" precision="22" scale="0" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="cuentausuario" class="com.duoc.desktravel.entity.Cuentausuario" fetch="select">
-            <column name="IDCUENTAUSUARIO" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <many-to-one name="tipocolaborador" class="com.duoc.desktravel.entity.Tipocolaborador" fetch="select">
-            <column name="IDTIPOCOLABORADOR" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <property name="nombre" type="string">
-            <column name="NOMBRE" length="200" not-null="true" />
-        </property>
-        <property name="direccion" type="string">
-            <column name="DIRECCION" length="200" />
-        </property>
-        <property name="telefono" type="big_decimal">
-            <column name="TELEFONO" precision="22" scale="0" not-null="true" />
-        </property>
-        <property name="rut" type="string">
-            <column name="RUT" length="12" />
-        </property>
-        <set name="contratos" table="CONTRATO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDCOLABORADOR" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Contrato" />
-        </set>
-    </class>
+  <class name="com.duoc.desktravel.model.Colaborador" optimistic-lock="version" schema="C##PABLO" table="COLABORADOR">
+    <id name="idcolaborador" type="big_decimal">
+      <column name="IDCOLABORADOR" precision="22" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.duoc.desktravel.model.Cuentausuario" fetch="select" name="cuentausuario">
+      <column name="IDCUENTAUSUARIO" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <many-to-one class="com.duoc.desktravel.model.Tipocolaborador" fetch="select" name="tipocolaborador">
+      <column name="IDTIPOCOLABORADOR" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <property name="nombre" type="string">
+      <column length="200" name="NOMBRE" not-null="true"/>
+    </property>
+    <property name="direccion" type="string">
+      <column length="200" name="DIRECCION"/>
+    </property>
+    <property name="telefono" type="big_decimal">
+      <column name="TELEFONO" not-null="true" precision="22" scale="0"/>
+    </property>
+    <property name="rut" type="string">
+      <column length="12" name="RUT"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="contratos" table="CONTRATO">
+      <key>
+        <column name="IDCOLABORADOR" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Contrato"/>
+    </set>
+  </class>
 </hibernate-mapping>

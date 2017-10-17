@@ -1,18 +1,17 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.duoc.desktravel.entity.Menu" table="MENU" schema="C##PABLO" optimistic-lock="version">
-        <id name="idmenu" type="big_decimal">
-            <column name="IDMENU" precision="22" scale="0" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="perfil" class="com.duoc.desktravel.entity.Perfil" fetch="select">
-            <column name="IDPERFIL" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <property name="nombremenu" type="string">
-            <column name="NOMBREMENU" length="200" />
-        </property>
-    </class>
+  <class name="com.duoc.desktravel.model.Menu" optimistic-lock="version" schema="C##PABLO" table="MENU">
+    <id name="idmenu" type="big_decimal">
+      <column name="IDMENU" precision="22" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.duoc.desktravel.model.Perfil" fetch="select" name="perfil">
+      <column name="IDPERFIL" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <property name="nombremenu" type="string">
+      <column length="200" name="NOMBREMENU"/>
+    </property>
+  </class>
 </hibernate-mapping>

@@ -1,33 +1,32 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.duoc.desktravel.entity.Curso" table="CURSO" schema="C##PABLO" optimistic-lock="version">
-        <id name="idcurso" type="big_decimal">
-            <column name="IDCURSO" precision="22" scale="0" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="colegio" class="com.duoc.desktravel.entity.Colegio" fetch="select">
-            <column name="IDCOLEGIO" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <property name="nombre" type="string">
-            <column name="NOMBRE" length="100" />
-        </property>
-        <property name="profesorjefe" type="string">
-            <column name="PROFESORJEFE" length="200" />
-        </property>
-        <set name="cuentacursos" table="CUENTACURSO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDCURSO" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Cuentacurso" />
-        </set>
-        <set name="alumnos" table="ALUMNO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="IDCURSO" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.duoc.desktravel.entity.Alumno" />
-        </set>
-    </class>
+  <class name="com.duoc.desktravel.model.Curso" optimistic-lock="version" schema="C##PABLO" table="CURSO">
+    <id name="idcurso" type="big_decimal">
+      <column name="IDCURSO" precision="22" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.duoc.desktravel.model.Colegio" fetch="select" name="colegio">
+      <column name="IDCOLEGIO" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <property name="nombre" type="string">
+      <column length="100" name="NOMBRE"/>
+    </property>
+    <property name="profesorjefe" type="string">
+      <column length="200" name="PROFESORJEFE"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="cuentacursos" table="CUENTACURSO">
+      <key>
+        <column name="IDCURSO" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Cuentacurso"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="alumnos" table="ALUMNO">
+      <key>
+        <column name="IDCURSO" not-null="true" precision="22" scale="0"/>
+      </key>
+      <one-to-many class="com.duoc.desktravel.model.Alumno"/>
+    </set>
+  </class>
 </hibernate-mapping>

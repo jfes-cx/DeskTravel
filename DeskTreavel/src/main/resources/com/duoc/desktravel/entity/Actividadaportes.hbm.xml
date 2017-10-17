@@ -1,28 +1,27 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15-10-2017 19:02:42 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.duoc.desktravel.entity.Actividadaportes" table="ACTIVIDADAPORTES" schema="C##PABLO" optimistic-lock="version">
-        <composite-id name="id" class="com.duoc.desktravel.entity.ActividadaportesId">
-            <key-property name="idactividadaportes" type="big_decimal">
-                <column name="IDACTIVIDADAPORTES" precision="22" scale="0" />
-            </key-property>
-            <key-property name="idcuentaalumnos" type="big_decimal">
-                <column name="IDCUENTAALUMNOS" precision="22" scale="0" />
-            </key-property>
-        </composite-id>
-        <many-to-one name="actividad" class="com.duoc.desktravel.entity.Actividad" update="false" insert="false" fetch="select">
-            <column name="IDACTIVIDADAPORTES" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <many-to-one name="cuentaalumno" class="com.duoc.desktravel.entity.Cuentaalumno" update="false" insert="false" fetch="select">
-            <column name="IDCUENTAALUMNOS" precision="22" scale="0" not-null="true" />
-        </many-to-one>
-        <property name="fecha" type="date">
-            <column name="FECHA" length="7" />
-        </property>
-        <property name="monto" type="big_decimal">
-            <column name="MONTO" precision="22" scale="0" />
-        </property>
-    </class>
+  <class name="com.duoc.desktravel.model.Actividadaportes" optimistic-lock="version" schema="C##PABLO" table="ACTIVIDADAPORTES">
+    <composite-id class="com.duoc.desktravel.model.ActividadaportesId" name="id">
+      <key-property name="idactividadaportes" type="big_decimal">
+        <column name="IDACTIVIDADAPORTES" precision="22" scale="0"/>
+      </key-property>
+      <key-property name="idcuentaalumnos" type="big_decimal">
+        <column name="IDCUENTAALUMNOS" precision="22" scale="0"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="com.duoc.desktravel.model.Actividad" fetch="select" insert="false" name="actividad" update="false">
+      <column name="IDACTIVIDADAPORTES" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <many-to-one class="com.duoc.desktravel.model.Cuentaalumno" fetch="select" insert="false" name="cuentaalumno" update="false">
+      <column name="IDCUENTAALUMNOS" not-null="true" precision="22" scale="0"/>
+    </many-to-one>
+    <property name="fecha" type="date">
+      <column length="7" name="FECHA"/>
+    </property>
+    <property name="monto" type="big_decimal">
+      <column name="MONTO" precision="22" scale="0"/>
+    </property>
+  </class>
 </hibernate-mapping>
