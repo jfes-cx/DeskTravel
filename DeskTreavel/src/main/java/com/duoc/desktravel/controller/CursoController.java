@@ -9,7 +9,6 @@ import com.duoc.desktravel.model.Colegio;
 import com.duoc.desktravel.model.Comuna;
 import com.duoc.desktravel.model.Conector;
 import com.duoc.desktravel.model.Curso;
-import com.duoc.desktravel.model.Pais;
 import com.duoc.desktravel.model.Region;
 import java.math.BigDecimal;
 import java.sql.CallableStatement;
@@ -75,15 +74,27 @@ public class CursoController {
         list.setModel(listModel);
     }
 
-    public void cargarListaCursos(JList<Curso> list){
+    public void cargarListaCursos(JList<Curso> list,BigDecimal idColegio){
         DefaultListModel<Curso> listModel = new DefaultListModel<>();
-        Colegio col1 = new Colegio(BigDecimal.valueOf(12),new Comuna(BigDecimal.valueOf(12),new Region(BigDecimal.valueOf(12),new Pais(BigDecimal.valueOf(12)),"Reg1")),"Colegio Pedro de Valdivia");
-        Colegio col2 = new Colegio(BigDecimal.valueOf(12),new Comuna(BigDecimal.valueOf(12),new Region(BigDecimal.valueOf(12),new Pais(BigDecimal.valueOf(12)),"Reg1")),"Volkshochschule Weimar");
-        Curso cur1 = new Curso(BigDecimal.valueOf(1), col1,"Primero A");
-        Curso cur2 = new Curso(BigDecimal.valueOf(2), col1,"Septimo B");
-        listModel.addElement(cur1);
-        listModel.addElement(cur2);
-
+        String command = "{call OBTENER_CURSO_BYCOL(?,?)}";
+        CallableStatement cstmt;
+        try {
+            cstmt = conn.prepareCall(command);
+            cstmt.registerOutParameter(1,OracleTypes.CURSOR);
+            cstmt.setInt(2,idColegio.intValueExact());
+            cstmt.execute();
+            ResultSet rs = (ResultSet) cstmt.getObject(1);
+            while (rs.next()) { 
+                Curso cur  =  new Curso();
+                cur.setNombre(rs.getString("NOMBRE"));
+                cur.setIdcurso(rs.getBigDecimal("IDCURSO"));
+                cur.setProfesorjefe(rs.getString("PROFESORJEFE"));
+                listModel.addElement(cur);
+            }
+            cstmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CursoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         list.setModel(listModel);
     }
     
@@ -136,6 +147,7 @@ public class CursoController {
             col.setTelefono(tel);
             col.setComuna(comuna);
             col.setIdcolegio(rs);
+            System.out.println("ID COLEGIO: "+rs);
             ((DefaultListModel)lista.getModel()).addElement(col);
         } catch (SQLException ex) {
             Logger.getLogger(CursoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -174,9 +186,31 @@ public class CursoController {
         }   
     }
 
-    public Boolean actualizarListaCurso(String nombre, String profeJefe, JList<Curso> listCursos) {
-        ((DefaultListModel)listCursos.getModel()).addElement(nombre);
-        return true;
+    public Boolean actualizarListaCurso(String nombre, String profeJefe,Colegio colegio ,JList<Curso> listCursos) {
+
+        String command = "{call INSERT_CURSO(?,?,?,?)}";
+        CallableStatement cstmt;
+        try {
+            cstmt = conn.prepareCall(command);
+            cstmt.registerOutParameter(1,OracleTypes.NUMBER);
+            cstmt.setString(2,nombre);
+            cstmt.setString(3,profeJefe);
+            cstmt.setInt(4,colegio.getIdcolegio().intValueExact());
+            cstmt.execute();
+            BigDecimal rs = cstmt.getBigDecimal(1);
+            cstmt.close();
+            Curso cur =  new Curso();
+            cur.setNombre(nombre);
+            cur.setProfesorjefe(profeJefe);
+            cur.setColegio(colegio);
+            cur.setIdcurso(rs);
+            System.out.println("ID Curso: "+rs);
+            ((DefaultListModel)listCursos.getModel()).addElement(cur);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(CursoController.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+        return false;
     }
     
     public Boolean cargarTablaAlumnos(BigDecimal idCurso, JTable tblAlumnos){

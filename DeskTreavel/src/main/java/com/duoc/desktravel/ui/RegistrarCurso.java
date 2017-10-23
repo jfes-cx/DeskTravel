@@ -13,13 +13,21 @@ import com.duoc.desktravel.model.Region;
 import com.duoc.desktravel.util.HibernateUtil;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDesktopPane;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -320,8 +328,9 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
     private void btnAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCursoActionPerformed
         String nombre = txtNombreCurso.getText();
         String profeJefe = txtProfeCurso.getText();
+        Colegio col = listColegios.getSelectedValue();
       
-        Boolean result  = cursocon.actualizarListaCurso(nombre, profeJefe,listCursos);
+        Boolean result  = cursocon.actualizarListaCurso(nombre, profeJefe,col,listCursos);
         if(result){
             JOptionPane.showMessageDialog(this, "Curso agregado correctamente");
         }else{
@@ -385,7 +394,6 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
     private void poblarListas() {
          cursocon  = new CursoController();
          cursocon.cargarListaColegios(listColegios);
-         cursocon.cargarListaCursos(listCursos);
          DefaultComboBoxModel regionModel = new DefaultComboBoxModel();
          cmbRegion.setModel(regionModel);
          cmbRegion.addItemListener(new ItemListener() {
@@ -395,6 +403,36 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
             }
           });
          cursocon.cargarComboRegion(cmbRegion);
+         
+         ListSelectionListener listSelectionListener = new ListSelectionListener() {
+                public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                  boolean adjust = listSelectionEvent.getValueIsAdjusting();       
+                  if (!adjust) {
+                    JList list = (JList) listSelectionEvent.getSource();
+                    int selections[] = list.getSelectedIndices();
+                    Object selectionValues[] = list.getSelectedValues();
+                    for (int i = 0, n = selections.length; i < n; i++) {
+                      Colegio col = (Colegio) selectionValues[i];
+                      cursocon.cargarListaCursos(listCursos,col.getIdcolegio());
+                    }
+                  }
+                }
+              };
+              listColegios.addListSelectionListener(listSelectionListener);
+
+              MouseListener mouseListener = new MouseAdapter() {
+                public void mouseClicked(MouseEvent mouseEvent) {
+                  JList theList = (JList) mouseEvent.getSource();
+                  if (mouseEvent.getClickCount() == 2) {
+                    int index = theList.locationToIndex(mouseEvent.getPoint());
+                    if (index >= 0) {
+                      Object o = theList.getModel().getElementAt(index);
+                      System.out.println("Double-clicked on: " + o.toString());
+                    }
+                  }
+                }
+              };
+              listColegios.addMouseListener(mouseListener);
     }
     
      private void actualizarComunas(){
