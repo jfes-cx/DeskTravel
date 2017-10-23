@@ -5,14 +5,17 @@
  */
 package com.duoc.desktravel.ui;
 
+import com.duoc.desktravel.controller.AlumnoController;
 import com.duoc.desktravel.controller.CursoController;
 import com.duoc.desktravel.model.Colegio;
+import com.duoc.desktravel.model.Comuna;
 import com.duoc.desktravel.model.Curso;
 import com.duoc.desktravel.util.HibernateUtil;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -23,7 +26,7 @@ import org.hibernate.Session;
  * @author Agustín
  */
 public class RegistroAlumno extends javax.swing.JInternalFrame {
-    private CursoController cursocon = new CursoController();
+    private AlumnoController alumnocon = new AlumnoController();
     private Curso curso;
 
     /**
@@ -64,12 +67,14 @@ public class RegistroAlumno extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblAlumnos = new javax.swing.JTable();
         btnRegistrar = new javax.swing.JButton();
+        lblRut = new javax.swing.JLabel();
+        txtRut = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setPreferredSize(new java.awt.Dimension(852, 456));
+        setPreferredSize(new java.awt.Dimension(852, 480));
 
         btnTerminar.setText("Terminar");
         btnTerminar.addActionListener(new java.awt.event.ActionListener() {
@@ -108,15 +113,24 @@ public class RegistroAlumno extends javax.swing.JInternalFrame {
             }
         });
 
+        lblRut.setText("Rut:");
+
         javax.swing.GroupLayout pnlRegistroLayout = new javax.swing.GroupLayout(pnlRegistro);
         pnlRegistro.setLayout(pnlRegistroLayout);
         pnlRegistroLayout.setHorizontalGroup(
             pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRegistroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNomAlumno)
+                            .addGroup(pnlRegistroLayout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblRegistroAl))
+                        .addComponent(btnRegistrar))
                     .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblNomAlumno)
                         .addGroup(pnlRegistroLayout.createSequentialGroup()
                             .addComponent(lblTelAlumno)
                             .addGap(18, 18, 18)
@@ -127,11 +141,12 @@ public class RegistroAlumno extends javax.swing.JInternalFrame {
                                 .addComponent(lblCorrAlumno))
                             .addGap(18, 18, 18)
                             .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(lblRegistroAl))
-                    .addComponent(btnRegistrar))
+                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lblRut)
+                    .addGroup(pnlRegistroLayout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE))
         );
@@ -146,7 +161,11 @@ public class RegistroAlumno extends javax.swing.JInternalFrame {
                         .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNomAlumno)
                             .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblRut)
+                            .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
                         .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDirAlumno)
                             .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -155,10 +174,10 @@ public class RegistroAlumno extends javax.swing.JInternalFrame {
                             .addComponent(lblCorrAlumno)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTelAlumno)
-                            .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(txtTel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRegistrar)
                         .addContainerGap())
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)))
@@ -187,31 +206,21 @@ public class RegistroAlumno extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
-         String query = "from Comuna";        
-         List res = executeHQLQuery(query);
-         //rsltArea.setText(res.toString());
-                 
-
-        /*
-        // start transaction
-        session.beginTransaction();
-
-        // create invitation Object
-        Colegio col = new Colegio();
-        //col.setComuna();
-        col.setDireccion("Nuena imperial 555");
-        col.setNombre("Colegio Nuevo");
-        col.setTelefono(new BigDecimal(5569));
-
-        // Save the colitation to database
-        session.save(col);
-
-        // Commit the transaction
-        session.getTransaction().commit();*/
+         this.setVisible(false);
     }//GEN-LAST:event_btnTerminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
+        String nombre = txtNombre.getText();
+        String direccion = txtDireccion.getText();
+        String telefono = txtTel.getText();
+        String correo = txtCorreo.getText();
+        String rut = txtRut.getText();
+        Boolean result  = alumnocon.actualizarTablaAlumnos(nombre, direccion, telefono, correo,rut,curso.getIdcurso(),tblAlumnos);
+        if(result){
+            JOptionPane.showMessageDialog(this, "Alumno agregado correctamente");
+        }else{
+            JOptionPane.showMessageDialog(this, "Alumno no pudo ser agregado");
+        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private List executeHQLQuery(String hql) {
@@ -258,17 +267,20 @@ public class RegistroAlumno extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblDirAlumno;
     private javax.swing.JLabel lblNomAlumno;
     private javax.swing.JLabel lblRegistroAl;
+    private javax.swing.JLabel lblRut;
     private javax.swing.JLabel lblTelAlumno;
     private javax.swing.JPanel pnlRegistro;
     private javax.swing.JTable tblAlumnos;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtRut;
     private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables
 
     private void iniciarComponentes(Curso curso) {
+        this.curso = curso;
         lblRegistroAl.setText(lblRegistroAl.getText()+" "+curso.getNombre());
-        cursocon.cargarTablaAlumnos(curso.getIdcurso(),tblAlumnos);
+        alumnocon.cargarTablaAlumnos(curso.getIdcurso(),tblAlumnos);
     }
 }

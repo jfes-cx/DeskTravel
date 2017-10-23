@@ -17,6 +17,30 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miRegistrarCursoActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miClientes">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Clientes"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miClientesActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miDestinos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Destinos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miDestinosActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miTipos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tipos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miTiposActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mContratos">
@@ -63,14 +87,22 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="barraEstado" max="32767" attributes="0"/>
-          <Component id="panelCentral" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="barraEstado" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnDesconectar" min="-2" pref="122" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+          </Group>
+          <Component id="panelCentral" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="barraEstado" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="barraEstado" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnDesconectar" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="panelCentral" max="32767" attributes="0"/>
           </Group>
@@ -84,20 +116,14 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   <Component id="lblEstadoCuenta" min="-2" pref="263" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblDesconectar" min="-2" pref="91" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                  <Component id="lblEstadoCuenta" alignment="3" pref="25" max="32767" attributes="0"/>
-                  <Component id="lblDesconectar" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="lblEstadoCuenta" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -105,14 +131,6 @@
         <Component class="javax.swing.JLabel" name="lblEstadoCuenta">
           <Properties>
             <Property name="text" type="java.lang.String" value="Bienvenido Administrador - Juan Francisco "/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblDesconectar">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="99" red="0" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Desconectar"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -160,5 +178,13 @@
         </Container>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnDesconectar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Desconectar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDesconectarActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

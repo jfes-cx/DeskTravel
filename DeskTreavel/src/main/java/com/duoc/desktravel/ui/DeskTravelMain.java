@@ -18,11 +18,12 @@ public class DeskTravelMain extends javax.swing.JFrame {
      */
     public DeskTravelMain() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     public DeskTravelMain(int idUsuario) {   
         initComponents();
-       
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -36,12 +37,15 @@ public class DeskTravelMain extends javax.swing.JFrame {
 
         barraEstado = new javax.swing.JPanel();
         lblEstadoCuenta = new javax.swing.JLabel();
-        lblDesconectar = new javax.swing.JLabel();
         panelCentral = new javax.swing.JPanel();
         escritorio = new javax.swing.JDesktopPane();
+        btnDesconectar = new javax.swing.JButton();
         barraMenuSuperior = new javax.swing.JMenuBar();
         mMantenedores = new javax.swing.JMenu();
         miRegistrarCurso = new javax.swing.JMenuItem();
+        miClientes = new javax.swing.JMenuItem();
+        miDestinos = new javax.swing.JMenuItem();
+        miTipos = new javax.swing.JMenuItem();
         mContratos = new javax.swing.JMenu();
         mSeguros = new javax.swing.JMenu();
         mReportes = new javax.swing.JMenu();
@@ -51,25 +55,17 @@ public class DeskTravelMain extends javax.swing.JFrame {
 
         lblEstadoCuenta.setText("Bienvenido Administrador - Juan Francisco ");
 
-        lblDesconectar.setForeground(new java.awt.Color(0, 153, 255));
-        lblDesconectar.setText("Desconectar");
-
         javax.swing.GroupLayout barraEstadoLayout = new javax.swing.GroupLayout(barraEstado);
         barraEstado.setLayout(barraEstadoLayout);
         barraEstadoLayout.setHorizontalGroup(
             barraEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraEstadoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblEstadoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDesconectar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblEstadoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         barraEstadoLayout.setVerticalGroup(
             barraEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(lblEstadoCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                .addComponent(lblDesconectar))
+            .addComponent(lblEstadoCuenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         escritorio.setPreferredSize(new java.awt.Dimension(905, 580));
@@ -100,6 +96,13 @@ public class DeskTravelMain extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        btnDesconectar.setText("Desconectar");
+        btnDesconectar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesconectarActionPerformed(evt);
+            }
+        });
+
         mMantenedores.setText("Mantenedores");
 
         miRegistrarCurso.setText("Registrar Curso");
@@ -109,6 +112,30 @@ public class DeskTravelMain extends javax.swing.JFrame {
             }
         });
         mMantenedores.add(miRegistrarCurso);
+
+        miClientes.setText("Clientes");
+        miClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miClientesActionPerformed(evt);
+            }
+        });
+        mMantenedores.add(miClientes);
+
+        miDestinos.setText("Destinos");
+        miDestinos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miDestinosActionPerformed(evt);
+            }
+        });
+        mMantenedores.add(miDestinos);
+
+        miTipos.setText("Tipos");
+        miTipos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miTiposActionPerformed(evt);
+            }
+        });
+        mMantenedores.add(miTipos);
 
         barraMenuSuperior.add(mMantenedores);
 
@@ -127,13 +154,19 @@ public class DeskTravelMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(barraEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(barraEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDesconectar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
             .addComponent(panelCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(barraEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(barraEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDesconectar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -147,55 +180,48 @@ public class DeskTravelMain extends javax.swing.JFrame {
         regcur.setVisible(true);
     }//GEN-LAST:event_miRegistrarCursoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeskTravelMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeskTravelMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeskTravelMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeskTravelMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void miClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miClientesActionPerformed
+        MantenedorClientes mancli = new MantenedorClientes(escritorio);
+        escritorio.add(mancli);
+        mancli.setVisible(true);
+    }//GEN-LAST:event_miClientesActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DeskTravelMain().setVisible(true);
-            }
-        });
-    }
+    private void miDestinosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miDestinosActionPerformed
+        MantenedorDestinos mandest = new MantenedorDestinos(escritorio);
+        escritorio.add(mandest);
+        mandest.setVisible(true);
+    }//GEN-LAST:event_miDestinosActionPerformed
+
+    private void miTiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTiposActionPerformed
+        MantenedorTipos mantipos = new MantenedorTipos(escritorio);
+        escritorio.add(mantipos);
+        mantipos.setVisible(true);
+    }//GEN-LAST:event_miTiposActionPerformed
+
+    private void btnDesconectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesconectarActionPerformed
+        Login log = new Login();
+        log.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnDesconectarActionPerformed
+
+    
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel barraEstado;
     private javax.swing.JMenuBar barraMenuSuperior;
+    private javax.swing.JButton btnDesconectar;
     private javax.swing.JDesktopPane escritorio;
-    private javax.swing.JLabel lblDesconectar;
     private javax.swing.JLabel lblEstadoCuenta;
     private javax.swing.JMenu mContratos;
     private javax.swing.JMenu mMantenedores;
     private javax.swing.JMenu mReportes;
     private javax.swing.JMenu mSeguros;
+    private javax.swing.JMenuItem miClientes;
+    private javax.swing.JMenuItem miDestinos;
     private javax.swing.JMenuItem miRegistrarCurso;
+    private javax.swing.JMenuItem miTipos;
     private javax.swing.JPanel panelCentral;
     // End of variables declaration//GEN-END:variables
 

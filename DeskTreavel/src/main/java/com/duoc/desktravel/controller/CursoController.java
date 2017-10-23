@@ -212,27 +212,4 @@ public class CursoController {
         }   
         return false;
     }
-    
-    public Boolean cargarTablaAlumnos(BigDecimal idCurso, JTable tblAlumnos){
-       
-        String command = "{call GET_COLEGIOS(?)}";
-        CallableStatement cstmt;
-        try {
-            cstmt = conn.prepareCall(command);
-            cstmt.registerOutParameter(1,OracleTypes.CURSOR);
-            cstmt.execute();
-            System.out.println("Result :"+cstmt.toString());
-            ResultSet rs = (ResultSet) cstmt.getObject(1);
-            System.out.println("Cantidad Columnas : "+rs.getMetaData().getColumnCount());
-            while (rs.next()) { 
-              System.out.println(rs.getString("NOMBRE") + ":" + rs.getString("DIRECCION") + ":" + rs.getString("TELEFONO")); 
-            }
-            cstmt.close();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(CursoController.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-    }
-
 }

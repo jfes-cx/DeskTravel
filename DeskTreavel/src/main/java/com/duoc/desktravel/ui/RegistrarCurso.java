@@ -10,28 +10,19 @@ import com.duoc.desktravel.model.Colegio;
 import com.duoc.desktravel.model.Comuna;
 import com.duoc.desktravel.model.Curso;
 import com.duoc.desktravel.model.Region;
-import com.duoc.desktravel.util.HibernateUtil;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.math.BigDecimal;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDesktopPane;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
 /**
  *
@@ -304,7 +295,6 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
 
         Curso cur = listCursos.getSelectedValue();
-                
         RegistroAlumno regal = new RegistroAlumno(cur);
         this.escritorio.add(regal);
         regal.show();

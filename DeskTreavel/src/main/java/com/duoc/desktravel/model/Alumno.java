@@ -14,11 +14,13 @@ public class Alumno  implements java.io.Serializable {
 
      private BigDecimal idalumno;
      private Apoderado apoderado;
+     private String nombreApoderado;
      private Curso curso;
      private String nombre;
      private String direccion;
      private BigDecimal telefono;
      private String correoelectronico;
+     private String rut;
      private Set contratos = new HashSet(0);
      private Set polizaseguros = new HashSet(0);
      private Set cuentaalumnos = new HashSet(0);
@@ -115,6 +117,22 @@ public class Alumno  implements java.io.Serializable {
     
     public void setCuentaalumnos(Set cuentaalumnos) {
         this.cuentaalumnos = cuentaalumnos;
+    }
+
+    public String getRut() {
+        return rut;
+    }
+
+    public void setRut(String rut) {
+        this.rut = rut;
+    }
+
+    public String getNombreApoderado() {
+        return nombreApoderado;
+    }
+
+    public void setNombreApoderado(String nombreApoderado) {
+        this.nombreApoderado = nombreApoderado;
     }
 
 
