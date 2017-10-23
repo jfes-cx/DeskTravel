@@ -27,6 +27,13 @@ public class Curso  implements java.io.Serializable {
         this.idcurso = idcurso;
         this.colegio = colegio;
     }
+    
+    public Curso(BigDecimal idcurso, Colegio colegio,String nombre) {
+        this.idcurso = idcurso;
+        this.colegio = colegio;
+        this.nombre = nombre;
+    }
+    
     public Curso(BigDecimal idcurso, Colegio colegio, String nombre, String profesorjefe, Set cuentacursos, Set alumnos) {
        this.idcurso = idcurso;
        this.colegio = colegio;
@@ -79,8 +86,12 @@ public class Curso  implements java.io.Serializable {
         this.alumnos = alumnos;
     }
 
+    @Override
+    public String toString(){
+        return getNombre();
+    }
 
-
+    
 
 }
 

@@ -3,13 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.duoc.desktravel.view;
+package com.duoc.desktravel.ui;
 
+import com.duoc.desktravel.controller.CursoController;
 import com.duoc.desktravel.model.Colegio;
+import com.duoc.desktravel.model.Comuna;
+import com.duoc.desktravel.model.Curso;
+import com.duoc.desktravel.model.Region;
 import com.duoc.desktravel.util.HibernateUtil;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -20,13 +30,22 @@ import org.hibernate.Session;
  * @author Agustín
  */
 public class RegistrarCurso extends javax.swing.JInternalFrame {
+    CursoController cursocon;
+    JDesktopPane escritorio;
 
     /**
      * Creates new form RegistrarCurso
      */
     public RegistrarCurso() {
-        poblarListas();
+     
         initComponents();
+           poblarListas();
+    }
+
+    RegistrarCurso(JDesktopPane aThis) {
+        this.escritorio = aThis;
+        initComponents();
+         poblarListas();
     }
 
     /**
@@ -53,6 +72,8 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
         lblSelecColegio = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listColegios = new javax.swing.JList<>();
+        lblRegion = new javax.swing.JLabel();
+        cmbRegion = new javax.swing.JComboBox<>();
         pnlCurso = new javax.swing.JPanel();
         lblTituloCurso = new javax.swing.JLabel();
         lblNombreCurso = new javax.swing.JLabel();
@@ -62,7 +83,7 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
         lblSelecCurso = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
-        listColegios1 = new javax.swing.JList<>();
+        listCursos = new javax.swing.JList<>();
         btnAgregarCurso = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
 
@@ -70,7 +91,7 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setPreferredSize(new java.awt.Dimension(852, 456));
+        setPreferredSize(new java.awt.Dimension(852, 480));
 
         pnlColegio.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -84,20 +105,20 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
 
         lblComuna.setText("Comuna:");
 
-        cmbComunaColegio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         btnAgregarColegio.setText("Agregar");
+        btnAgregarColegio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarColegioActionPerformed(evt);
+            }
+        });
 
         lblSelecColegio.setText("Seleccionar colegio");
 
-        listColegios.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(listColegios);
+
+        lblRegion.setText("Región");
 
         javax.swing.GroupLayout pnlColegioLayout = new javax.swing.GroupLayout(pnlColegio);
         pnlColegio.setLayout(pnlColegioLayout);
@@ -108,7 +129,7 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
                 .addGroup(pnlColegioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlColegioLayout.createSequentialGroup()
                         .addComponent(lblSelecColegio)
-                        .addGap(0, 395, Short.MAX_VALUE))
+                        .addGap(0, 486, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -121,45 +142,53 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
                             .addComponent(lblDireccion)
                             .addComponent(lblComuna)
                             .addComponent(lblTelefono))
-                        .addGap(23, 23, 23)
-                        .addGroup(pnlColegioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTelefonoColegio)
-                            .addComponent(txtDireccionColegio)
-                            .addComponent(txtNombreColegio)
-                            .addComponent(cmbComunaColegio, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnAgregarColegio))
+                        .addGroup(pnlColegioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlColegioLayout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(pnlColegioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtTelefonoColegio, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                    .addComponent(txtDireccionColegio)
+                                    .addComponent(txtNombreColegio)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlColegioLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnlColegioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmbRegion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbComunaColegio, 0, 140, Short.MAX_VALUE)))))
+                    .addComponent(btnAgregarColegio)
+                    .addComponent(lblRegion))
                 .addContainerGap())
         );
         pnlColegioLayout.setVerticalGroup(
             pnlColegioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addGroup(pnlColegioLayout.createSequentialGroup()
+                .addComponent(lblSelecColegio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1))
+            .addGroup(pnlColegioLayout.createSequentialGroup()
+                .addComponent(lblTituloColegio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlColegioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombreColegio)
+                    .addComponent(txtNombreColegio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlColegioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDireccion)
+                    .addComponent(txtDireccionColegio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(pnlColegioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTelefono)
+                    .addComponent(txtTelefonoColegio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(pnlColegioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRegion)
+                    .addComponent(cmbRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlColegioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlColegioLayout.createSequentialGroup()
-                        .addComponent(lblTituloColegio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlColegioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblNombreColegio)
-                            .addComponent(txtNombreColegio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlColegioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDireccion)
-                            .addComponent(txtDireccionColegio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6)
-                        .addGroup(pnlColegioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTelefono)
-                            .addComponent(txtTelefonoColegio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlColegioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblComuna)
-                            .addComponent(cmbComunaColegio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAgregarColegio))
-                    .addGroup(pnlColegioLayout.createSequentialGroup()
-                        .addComponent(lblSelecColegio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)))
-                .addGap(0, 31, Short.MAX_VALUE))
+                    .addComponent(lblComuna, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cmbComunaColegio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAgregarColegio))
         );
 
         pnlCurso.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -170,18 +199,18 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
 
         lblProfesorCurso.setText("Profesor Jefe:");
 
-        lblSelecCurso.setText("Seleccionar colegio");
+        lblSelecCurso.setText("Seleccionar curso");
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        listColegios1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(listColegios1);
+        jScrollPane2.setViewportView(listCursos);
 
         btnAgregarCurso.setText("Agregar");
+        btnAgregarCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarCursoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlCursoLayout = new javax.swing.GroupLayout(pnlCurso);
         pnlCurso.setLayout(pnlCursoLayout);
@@ -205,7 +234,7 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
                 .addGap(11, 11, 11)
                 .addComponent(lblSelecCurso)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))
         );
         pnlCursoLayout.setVerticalGroup(
             pnlCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,7 +251,8 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
                     .addComponent(lblProfesorCurso)
                     .addComponent(txtProfeCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
-                .addComponent(btnAgregarCurso))
+                .addComponent(btnAgregarCurso)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCursoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -264,44 +294,41 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-         String query = "from Comuna";        
-         List res = executeHQLQuery(query);
-         //rsltArea.setText(res.toString());
-                 
 
-        /*
-        // start transaction
-        session.beginTransaction();
-
-        // create invitation Object
-        Colegio col = new Colegio();
-        //col.setComuna();
-        col.setDireccion("Nuena imperial 555");
-        col.setNombre("Colegio Nuevo");
-        col.setTelefono(new BigDecimal(5569));
-
-        // Save the colitation to database
-        session.save(col);
-
-        // Commit the transaction
-        session.getTransaction().commit();*/
+        Curso cur = listCursos.getSelectedValue();
+                
+        RegistroAlumno regal = new RegistroAlumno(cur);
+        this.escritorio.add(regal);
+        regal.show();
+        this.hide();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
-    private List executeHQLQuery(String hql) {
-    try {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        Query q = session.createQuery(hql);
-        List resultList = q.list();
-        //displayResult(resultList);
-        session.getTransaction().commit();
-        return resultList;
-    } catch (HibernateException he) {
-        List lst = new ArrayList();
-        lst.add(he);
-        return lst;
-    }
-}
+    private void btnAgregarColegioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarColegioActionPerformed
+        String nombre = txtNombreColegio.getText();
+        String direccion = txtDireccionColegio.getText();
+        String telefono = txtTelefonoColegio.getText();
+        Comuna comuna = (Comuna)cmbComunaColegio.getSelectedItem();
+        Boolean result  = cursocon.actualizarListaColegio(nombre, direccion, telefono, comuna,listColegios);
+        if(result){
+            JOptionPane.showMessageDialog(this, "Colegio agregado correctamente");
+        }else{
+            JOptionPane.showMessageDialog(this, "Colegio no pudo ser agregado");
+        }
+        
+    }//GEN-LAST:event_btnAgregarColegioActionPerformed
+
+    private void btnAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCursoActionPerformed
+        String nombre = txtNombreCurso.getText();
+        String profeJefe = txtProfeCurso.getText();
+      
+        Boolean result  = cursocon.actualizarListaCurso(nombre, profeJefe,listCursos);
+        if(result){
+            JOptionPane.showMessageDialog(this, "Curso agregado correctamente");
+        }else{
+            JOptionPane.showMessageDialog(this, "Curso no pudo ser agregado");
+        }
+    }//GEN-LAST:event_btnAgregarCursoActionPerformed
+
     
     private void displayResult(List resultList) {
     Vector<String> tableHeaders = new Vector<String>();
@@ -327,7 +354,8 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnAgregarColegio;
     private javax.swing.JButton btnAgregarCurso;
     private javax.swing.JButton btnSiguiente;
-    private javax.swing.JComboBox<String> cmbComunaColegio;
+    private javax.swing.JComboBox<Comuna> cmbComunaColegio;
+    private javax.swing.JComboBox<Region> cmbRegion;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
@@ -337,13 +365,14 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNombreColegio;
     private javax.swing.JLabel lblNombreCurso;
     private javax.swing.JLabel lblProfesorCurso;
+    private javax.swing.JLabel lblRegion;
     private javax.swing.JLabel lblSelecColegio;
     private javax.swing.JLabel lblSelecCurso;
     private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblTituloColegio;
     private javax.swing.JLabel lblTituloCurso;
-    private javax.swing.JList<String> listColegios;
-    private javax.swing.JList<String> listColegios1;
+    private javax.swing.JList<Colegio> listColegios;
+    private javax.swing.JList<Curso> listCursos;
     private javax.swing.JPanel pnlColegio;
     private javax.swing.JPanel pnlCurso;
     private javax.swing.JTextField txtDireccionColegio;
@@ -354,6 +383,24 @@ public class RegistrarCurso extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void poblarListas() {
-        
+         cursocon  = new CursoController();
+         cursocon.cargarListaColegios(listColegios);
+         cursocon.cargarListaCursos(listCursos);
+         DefaultComboBoxModel regionModel = new DefaultComboBoxModel();
+         cmbRegion.setModel(regionModel);
+         cmbRegion.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent arg0) {
+            actualizarComunas();
+            }
+          });
+         cursocon.cargarComboRegion(cmbRegion);
     }
+    
+     private void actualizarComunas(){
+         Region region = (Region)cmbRegion.getSelectedItem();
+         cursocon.actualizarComunas(region.getIdregion(),cmbComunaColegio);
+     }
+     
+     
 }

@@ -62,7 +62,10 @@ public class Region  implements java.io.Serializable {
         this.comunas = comunas;
     }
 
-
+     @Override
+    public String toString(){
+        return getNombre();
+    }
 
 
 }

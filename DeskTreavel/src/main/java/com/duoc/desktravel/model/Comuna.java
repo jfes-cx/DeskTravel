@@ -60,6 +60,11 @@ public class Comuna  implements java.io.Serializable {
     public void setColegios(Set colegios) {
         this.colegios = colegios;
     }
+    
+      @Override
+    public String toString(){
+        return getNombre();
+    }
 
 
 

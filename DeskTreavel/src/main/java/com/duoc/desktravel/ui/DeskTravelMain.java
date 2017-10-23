@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.duoc.desktravel.view;
+package com.duoc.desktravel.ui;
+
+import java.awt.event.ComponentEvent;
 
 /**
  *
@@ -16,6 +18,11 @@ public class DeskTravelMain extends javax.swing.JFrame {
      */
     public DeskTravelMain() {
         initComponents();
+    }
+
+    public DeskTravelMain(int idUsuario) {   
+        initComponents();
+       
     }
 
     /**
@@ -40,6 +47,7 @@ public class DeskTravelMain extends javax.swing.JFrame {
         mReportes = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(905, 580));
 
         lblEstadoCuenta.setText("Bienvenido Administrador - Juan Francisco ");
 
@@ -64,15 +72,17 @@ public class DeskTravelMain extends javax.swing.JFrame {
                 .addComponent(lblDesconectar))
         );
 
+        escritorio.setPreferredSize(new java.awt.Dimension(905, 580));
+
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 852, Short.MAX_VALUE)
+            .addGap(0, 905, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addGap(0, 580, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout panelCentralLayout = new javax.swing.GroupLayout(panelCentral);
@@ -85,7 +95,9 @@ public class DeskTravelMain extends javax.swing.JFrame {
         );
         panelCentralLayout.setVerticalGroup(
             panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addGroup(panelCentralLayout.createSequentialGroup()
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         mMantenedores.setText("Mantenedores");
@@ -130,7 +142,7 @@ public class DeskTravelMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miRegistrarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRegistrarCursoActionPerformed
-        RegistrarCurso regcur = new RegistrarCurso();
+        RegistrarCurso regcur = new RegistrarCurso(escritorio);
         escritorio.add(regcur);
         regcur.setVisible(true);
     }//GEN-LAST:event_miRegistrarCursoActionPerformed
@@ -170,6 +182,8 @@ public class DeskTravelMain extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel barraEstado;
@@ -184,4 +198,7 @@ public class DeskTravelMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem miRegistrarCurso;
     private javax.swing.JPanel panelCentral;
     // End of variables declaration//GEN-END:variables
+
+
+
 }
