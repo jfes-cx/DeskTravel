@@ -6,6 +6,7 @@
 package com.duoc.desktravel.ui;
 
 import com.duoc.desktravel.controller.LoginController;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -134,9 +135,9 @@ public class Login extends javax.swing.JFrame {
         String usuario = txtUsuario.getText();
         String contra = txtContra.getText(); 
         LoginController log = new LoginController();
-        int autResult = log.autenticar(usuario, contra);
+        ArrayList autResult = log.autenticar(usuario, contra);
         
-        if(autResult > 0){
+        if((int)autResult.get(2) > 0){
              JOptionPane.showMessageDialog(this, "Usuario Correcto");
              DeskTravelMain escritorio = new DeskTravelMain(autResult);
              this.setVisible(false);

@@ -6,6 +6,7 @@
 package com.duoc.desktravel.ui;
 
 import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,9 +22,10 @@ public class DeskTravelMain extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
-    public DeskTravelMain(int idUsuario) {   
+    public DeskTravelMain(ArrayList usuario) {   
         initComponents();
         this.setLocationRelativeTo(null);
+        lblEstadoCuenta.setText("Bienvenido(a) "+usuario.get(0).toString()+" Perfil : "+usuario.get(1).toString());
     }
 
     /**
